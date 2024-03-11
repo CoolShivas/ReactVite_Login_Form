@@ -17,14 +17,19 @@ const BasicForm = () => {
 
     const handlerOnLoginBtn = (event) => {
         event.preventDefault();
-        const newData = [...allEntry, {
-            id: new Date().getTime().toString(),
-            email: email,
-            password: password,
-        }]
-        setAllEntry(newData);
-        setEmail('');
-        setPassword('');
+        if (email && password) {
+            const newData = [...allEntry, {
+                id: new Date().getTime().toString(),
+                email: email,
+                password: password,
+            }]
+            setAllEntry(newData);
+            setEmail('');
+            setPassword('');
+        }
+        else {
+            alert('Please fill the details');
+        }
     }
 
     useEffect(() => {
@@ -46,7 +51,7 @@ const BasicForm = () => {
                 <input type="email"
                     onChange={(event) => { setEmail(event.target.value) }}
                     value={email}
-                    required />
+                />
             </div>
             <div>
                 <label htmlFor="password"> Password </label>
@@ -55,7 +60,7 @@ const BasicForm = () => {
                 <input type="password"
                     onChange={(event) => { setPassword(event.target.value) }}
                     value={password}
-                    required
+
                 />
             </div>
             <div>
