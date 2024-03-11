@@ -31,6 +31,12 @@ const BasicForm = () => {
         localStorage.setItem('users', JSON.stringify(allEntry))
     }, [allEntry])
 
+    const handlerOnDeleteBtn = (del) => {
+        const deleteButton = allEntry.filter((arr) => {
+            return arr.id !== del
+        })
+        setAllEntry(deleteButton);
+    }
     return <>
         <form onSubmit={handlerOnLoginBtn}>
             <div>
@@ -58,9 +64,18 @@ const BasicForm = () => {
         </form>
 
         <div className="listing_entries">
-            {allEntry.map((currElem) => {
+            {/* {allEntry.map((currElem) => {
                 return <div key={currElem.id}>
                     <h2> {currElem.email} - {currElem.password} </h2>
+                    <button onClick={() => handlerOnDeleteBtn(currElem.id)}> Delete </button>
+                </div>
+            })} */}
+
+            {allEntry.map((currElem) => {
+                const { id, email, password } = currElem;
+                return <div key={id}>
+                    <h2> {email} - {password} </h2>
+                    <button onClick={() => handlerOnDeleteBtn(id)}> Delete </button>
                 </div>
             })}
         </div>
