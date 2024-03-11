@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
 
+const getDataAfterRefreshingPage = () => {
+    let data = localStorage.getItem('users');
+    if (data) {
+        return JSON.parse(localStorage.getItem('users'));
+    }
+}
 
 const BasicForm = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [allEntry, setAllEntry] = useState([]);
+    const [allEntry, setAllEntry] = useState(getDataAfterRefreshingPage());
 
 
     const handlerOnLoginBtn = (event) => {
