@@ -14,9 +14,15 @@ const BasicForm = () => {
     const [allEntry, setAllEntry] = useState(getDataAfterRefreshingPage());
 
 
+
     const handlerOnLoginBtn = (event) => {
         event.preventDefault();
-        setAllEntry([...allEntry, { email: email, password: password }]);
+        const newData = [...allEntry, {
+            id: new Date().getTime().toString(),
+            email: email,
+            password: password,
+        }]
+        setAllEntry(newData);
         setEmail('');
         setPassword('');
     }
@@ -52,8 +58,8 @@ const BasicForm = () => {
         </form>
 
         <div className="listing_entries">
-            {allEntry.map((currElem, index) => {
-                return <div key={index}>
+            {allEntry.map((currElem) => {
+                return <div key={currElem.id}>
                     <h2> {currElem.email} - {currElem.password} </h2>
                 </div>
             })}
